@@ -66,6 +66,7 @@ def main_menu(role, i18n: I18n) -> ReplyKeyboardMarkup:
     )
     builder.row(
         KeyboardButton(text=i18n("btn_profile")),
+        KeyboardButton(text=i18n("btn_dashboard")),
     )
     return builder.as_markup(resize_keyboard=True)
 
