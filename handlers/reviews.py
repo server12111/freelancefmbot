@@ -23,6 +23,14 @@ router = Router()
 async def handle_reviews_menu(message: Message, i18n, db_user: User | None) -> None:
     if not db_user:
         return
+
+
+@router.callback_query(F.data == "goto_reviews")
+async def cb_goto_reviews(callback: CallbackQuery, i18n, db_user: User | None) -> None:
+    if not db_user:
+        return
+    await show_reviews_received(callback, i18n, db_user)
+    await callback.answer()
     await show_reviews_received(message, i18n, db_user)
 
 

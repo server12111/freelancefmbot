@@ -54,19 +54,11 @@ def main_menu(role, i18n: I18n) -> ReplyKeyboardMarkup:
     )
     builder.row(
         KeyboardButton(text=i18n("btn_my_jobs")),
-        KeyboardButton(text=i18n("btn_my_applications")),
-    )
-    builder.row(
         KeyboardButton(text=i18n("btn_browse_services")),
+    )
+    builder.row(
         KeyboardButton(text=i18n("btn_my_services")),
-    )
-    builder.row(
-        KeyboardButton(text=i18n("btn_chats")),
-        KeyboardButton(text=i18n("btn_reviews")),
-    )
-    builder.row(
         KeyboardButton(text=i18n("btn_profile")),
-        KeyboardButton(text=i18n("btn_dashboard")),
     )
     return builder.as_markup(resize_keyboard=True)
 
@@ -538,14 +530,16 @@ def profile_extended_kb(i18n: I18n, notifications_enabled: bool = True) -> Inlin
     builder = InlineKeyboardBuilder()
     notif_label = i18n("btn_notifications_off") if notifications_enabled else i18n("btn_notifications_on")
     builder.add(
-        _nav(i18n("btn_edit_name"),  "edit_name"),
+        _nav(i18n("btn_chats"),      "goto_chats"),
+        _nav(i18n("btn_reviews"),    "goto_reviews"),
         _nav(i18n("btn_dashboard"),  "dashboard"),
+        _nav(i18n("btn_portfolio"),  "portfolio_manage"),
         _ok(i18n("btn_top_up"),      "balance"),
         _nav(i18n("btn_withdraw"),   "balance"),
+        _nav(i18n("btn_edit_name"),  "edit_name"),
         _nav(notif_label,            "toggle_notifications"),
-        _nav(i18n("btn_portfolio"),  "portfolio_manage"),
     )
-    builder.adjust(2, 2, 1, 1)
+    builder.adjust(2, 2, 2, 2)
     return builder.as_markup()
 
 

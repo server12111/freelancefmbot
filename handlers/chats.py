@@ -26,6 +26,14 @@ async def handle_chats_menu(message: Message, state: FSMContext, i18n, db_user: 
     await show_chats_list(message, i18n, db_user)
 
 
+@router.callback_query(F.data == "goto_chats")
+async def cb_goto_chats(callback: CallbackQuery, i18n, db_user: User | None) -> None:
+    if not db_user:
+        return
+    await show_chats_list(callback, i18n, db_user)
+    await callback.answer()
+
+
 async def show_chats_list(target, i18n, db_user: User) -> None:
     async with async_session_maker() as session:
         convs = await get_conversations_list(session, db_user.id)
